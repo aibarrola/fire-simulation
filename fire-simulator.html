@@ -10,15 +10,14 @@
     <div id="chart_div" style="width: 900px; height: 500px;"></div>
 
     <form id="form1">
-        <p> Initial X: <input type="number" min="0" max="100" id="x" name="x" value=50> </p>
-        <p> Initial Y: <input type="number" min="0" max="100" id="y" name="y" value=50> </p>
-        <p> Wind Direction: <input type="number" id="wind-direction" name="wind-direction"> </p>
-        <p> Wind Speed: <input type="number" id="wind-speed"> </p>
-        <input type="button" onclick="startSimulation()" value="Run Simulation ">
+        <p> Initial X: <input type="number" min="0" max="100" id="x" name="x" value="0"> </p>
+        <p> Initial Y: <input type="number" min="0" max="100" id="y" name="y" value="0"> </p>
+        <!-- <p> Wind Direction: <input type="number" min="0" max="1" value="45" id="wind-direction" name="wind-direction"> degrees </p> -->
+        <p> Wind Speed: <input type="number"  min="0" max="100" value="10" id="wind-speed"> mph </p>
+        <input type="button" onclick="startSimulation()" value="Add fire">
     </form>
 
-
-        <input type="button" onclick="addChart()" value="Add">
+        <button onclick="randStartPoint()"> Start a random fire!</button>
 
 
     <script src="fire-simulator.js"></script>

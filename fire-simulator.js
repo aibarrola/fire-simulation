@@ -1,10 +1,10 @@
 //=========================
 // SIMULATION GLOBAL VARIABLES
 //=========================
-var x = 50;
-var y = 50;
-var windDirection;
-var windSpeed;
+var x = 0;
+var y = 0;
+var windDirection = 0;
+var windSpeed = 10;
 var data = [];
 var chart;
 var options = {}
@@ -14,6 +14,7 @@ var options = {}
 
 //DRAW THE CHART 
 google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
 
     data = google.visualization.arrayToDataTable([
@@ -23,11 +24,23 @@ function drawChart() {
     
     options = {
         title: 'Fire Spread Simulation',
-        hAxis: {title: 'X-axis', minValue: 0, maxValue: 100},
-        vAxis: {title: 'Y-axis', minValue: 0, maxValue: 100},
+        hAxis: {title: 'X-axis', minValue: 0, maxValue: 1000},
+        vAxis: {title: 'Y-axis', minValue: 0, maxValue: 1000},
         legend: 'none'
     };
     chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+}
+
+//PUT A RANDOM POINT ON THE CHART
+function randStartPoint(){
+    saveInp();
+    x = Math.floor(Math.random() * 1000);
+    y = Math.floor(Math.random() * 1000);
+
+    data.addRow([x,y]);
+    fireSpread(x,y,windSpeed)
+
     chart.draw(data, options);
 }
 
@@ -36,37 +49,42 @@ function drawChart() {
 function saveInp(){
     x = parseInt(document.getElementById("x").value);
     y = parseInt(document.getElementById("y").value);
-    windDirection = document.getElementById("wind-direction").value;
-    windSpeed = document.getElementById("wind-speed").value;
+    // windDirection = parseInt(document.getElementById("wind-direction").value);
+    windSpeed = parseInt(document.getElementById("wind-speed").value);
 }
 //CHECK AND SHOW INPUT VALUES
 function showInput(){
     console.log(x);console.log(y);console.log(windDirection);console.log(windSpeed);
 }
 
-//ADD DATA POINT TO CHART
-function addChart(){
-    data.addRows([
-        [4,9]
-    ]);
-    chart.draw(data, options);
+//SPREAD FIRE
+function fireSpread(x,y,w){
+    data.addRow([x+Math.floor(Math.random() * w),y]);
+    data.addRow([x,y+Math.floor(Math.random() * w)]);
+    data.addRow([x-Math.floor(Math.random() * w),y]);
+    data.addRow([x,y-Math.floor(Math.random() * w)]);
+}
+
+//ATTEMPT RECURSIVE 
+function fireSpread2(x,y){
+    data.addRow([fireSpread(x,y)]);
+    data.addRow([fireSpread(x,y)]);
+    data.addRow([fireSpread(x,y)]);
+    data.addRow([fireSpread(x,y)]);
 }
 
 
 
-
-
-
-google.charts.setOnLoadCallback(drawChart);
 //=================
 //MAIN FUNCTION
 //================= 
 function startSimulation(){
     //save inputs
     saveInp();
-    showInput();
-
+    data.addRow([x,y]);
+    fireSpread(x,y,windSpeed)
     //draw chart
+    chart.draw(data, options);
     google.charts.setOnLoadCallback(drawChart);
 
     
