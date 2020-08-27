@@ -24,35 +24,18 @@ function drawChart() {
     
     options = {
         title: 'Fire Spread Simulation',
-        hAxis: {title: 'X-axis', minValue: 0, maxValue: 1000},
-        vAxis: {title: 'Y-axis', minValue: 0, maxValue: 1000},
+        hAxis: {title: '', minValue: 0, maxValue: 1000},
+        vAxis: {title: '', minValue: 0, maxValue: 1000},
         legend: 'none',
         colors: ['#FF0000'],
+        pointShape: 'triangle',
+        pointSize: 15,
     };
     chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
     chart.draw(data, options);
 }
 
-//PUT A RANDOM POINT ON THE CHART
-function randStartPoint(){
-    saveInp();
 
-    //gets random x,y
-    x = Math.floor(Math.random() * 1000);
-    y = Math.floor(Math.random() * 1000);
-    data.addRow([x,y]);
-    
-    //adds fire spread
-    for (i=1; i<windSpeed/10; i++) {
-        setTimeout( function timer(){
-            fireSpread(x,y,windSpeed);
-            chart.draw(data,options);
-        }, i*1000 );
-    }
-
-
-    chart.draw(data, options);
-}
 
 
 //TO SAVE THE INPUT FROM THE FORM 
@@ -76,6 +59,17 @@ function fireSpread(x,y,w){
     data.addRow([x-Math.floor(Math.random() * w),y-Math.floor(Math.random() * w)]);
 }
 
+//SPREAD FIRE ANIMATION
+function fireSpreadAnimation(x,y,windSpeed){
+    for (i=1; i<windSpeed/10; i++) {
+        setTimeout( function timer(){
+            fireSpread(x,y,windSpeed);
+            chart.draw(data,options);
+        }, i*1000 );
+    }
+    chart.draw(data, options);
+}
+
 //ATTEMPT RECURSIVE 
 function fireSpread2(x,y){
     data.addRow([fireSpread(x,y)]);
@@ -84,22 +78,25 @@ function fireSpread2(x,y){
     data.addRow([fireSpread(x,y)]);
 }
 
-
-
-//=================
-//MAIN FUNCTION
-//================= 
-function startSimulation(){
+//ADD FIRE FUNCTION
+function addFire(){
     //save inputs
     saveInp();
     data.addRow([x,y]);
-    for (i=1; i<5; i++) {
-        setTimeout( function timer(){
-            fireSpread(x,y,windSpeed);
-            chart.draw(data,options);
-        }, i*1000 );
-    }
-    //draw chart
-    chart.draw(data, options);
+    fireSpreadAnimation(x,y,windSpeed);
 }
 
+//PUT A RANDOM POINT ON THE CHART
+function randStartPoint(num=1){
+    saveInp();
+    for(var i=0;i<num;i++){
+        //gets random x,y
+        x = Math.floor(Math.random() * 1000);
+        y = Math.floor(Math.random() * 1000);
+        data.addRow([x,y]);
+
+        //adds fire spread
+        fireSpreadAnimation(x,y,windSpeed);
+    }
+
+}

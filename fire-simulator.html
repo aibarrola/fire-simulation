@@ -2,22 +2,42 @@
   <head>
     <title> Fire Simulation</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      
-    </script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div id="chart_div" style="width: 900px; height: 500px;"></div>
 
-    <form id="form1">
-        <p> Initial X: <input type="number" min="0" max="100" id="x" name="x" value="500"> </p>
-        <p> Initial Y: <input type="number" min="0" max="100" id="y" name="y" value="500"> </p>
-        <!-- <p> Wind Direction: <input type="number" min="0" max="1" value="45" id="wind-direction" name="wind-direction"> degrees </p> -->
-        <p> Wind Speed: <input type="number"  min="0" max="100" value="10" id="wind-speed"> mph </p>
-        <input type="button" onclick="startSimulation()" value="Add fire">
-    </form>
+    <div id="chart_div" style="width: 95%; height: 550px;"></div>
 
-        <button onclick="randStartPoint()"> Start a random fire!</button>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-4">
+                <form id="form1">
+                    <p> Starting X: <input type="number" min="0" max="1000" id="x" name="x" value="500"> </p>
+                    <p> Starting Y: <input type="number" min="0" max="1000" id="y" name="y" value="500"> </p>
+                    <!-- <p> Wind Direction: <input type="number" min="0" max="1" value="45" id="wind-direction" name="wind-direction"> degrees </p> -->
+                    <p> Wind Speed: <input type="number"  min="0" max="100" value="10" id="wind-speed"> mph </p>
+                    <input class="btn btn-primary" type="button" onclick="addFire()" value="Add fire">
+                </form>
+            </div>
+
+            <div class="col-8">
+                <button class="btn btn-primary" onclick="randStartPoint()"> Start 1 random fire!</button> 
+                <button class="btn btn-warning" onclick="randStartPoint(5)"> Start 5 random fires!</button> 
+                <button class="btn btn-danger" onclick="randStartPoint(10)"> Start 10 random fires!</button>
+            </div>
+        </div>
+
+           
+    </div>
+
+    
+
+    
+
+
 
 
     <script src="fire-simulator.js"></script>
