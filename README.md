@@ -1,7 +1,7 @@
 # Fire Simulator 
 ### Visualize fire spread based on wind speed
 
-__Context__: A project from the Hack the Math Hackathon.
+__Context__: A project from the Hack the Math Hackathon. During the time, California has 30+ fires. I wanted to create a simulation to describe how fires spread depending on the wind speed. 
 [mintbean.io/hackthemath](https://sites.google.com/mintbean.io/hackthemath/home)
 
 __Requirements__:
