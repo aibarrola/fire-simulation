@@ -30,6 +30,7 @@ function drawChart() {
         colors: ['#FF0000'],
         pointShape: 'triangle',
         pointSize: 15,
+        backgroundColor: 'rgb(180, 230, 176)',
     };
     chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
     chart.draw(data, options);
@@ -70,14 +71,6 @@ function fireSpreadAnimation(x,y,windSpeed){
     chart.draw(data, options);
 }
 
-//ATTEMPT RECURSIVE 
-function fireSpread2(x,y){
-    data.addRow([fireSpread(x,y)]);
-    data.addRow([fireSpread(x,y)]);
-    data.addRow([fireSpread(x,y)]);
-    data.addRow([fireSpread(x,y)]);
-}
-
 //ADD FIRE FUNCTION
 function addFire(){
     //save inputs
@@ -98,5 +91,6 @@ function randStartPoint(num=1){
         //adds fire spread
         fireSpreadAnimation(x,y,windSpeed);
     }
+    
 
 }

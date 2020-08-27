@@ -1,14 +1,17 @@
 <html>
   <head>
-    <title> Fire Simulation</title>
+    <title> California Fires lol</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-  </head>
+    <style>
+        body {background-color: rgb(180, 230, 176);}
+    </style>
+</head>
   <body>
 
-    <div id="chart_div" style="width: 95%; height: 550px;"></div>
+        <div id="chart_div" style="width: 95%; height: 550px;"></div>
 
     <div class="container">
         <div class="row">
@@ -20,6 +23,8 @@
                     <!-- <p> Wind Direction: <input type="number" min="0" max="1" value="45" id="wind-direction" name="wind-direction"> degrees </p> -->
                     <p> Wind Speed: <input type="number"  min="0" max="100" value="10" id="wind-speed"> mph </p>
                     <input class="btn btn-primary" type="button" onclick="addFire()" value="Add fire">
+                    <button class="btn btn-danger" onclick="reset()"> Reset </button>
+
                 </form>
             </div>
 
