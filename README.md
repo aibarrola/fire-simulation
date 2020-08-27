@@ -1,7 +1,8 @@
 # Fire Simulator 
 ### Visualize fire spread based on wind speed
 
-__Context__: A project from the Hack the Math Hackathon. 
+__Context__: A project from the Hack the Math Hackathon.
+[mintbean.io/hackthemath](https://sites.google.com/mintbean.io/hackthemath/home)
 
 __Requirements__:
 1) You must use Javascript
