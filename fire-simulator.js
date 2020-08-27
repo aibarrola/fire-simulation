@@ -1,8 +1,8 @@
 //=========================
 // SIMULATION GLOBAL VARIABLES
 //=========================
-var x = 0;
-var y = 0;
+var x = 500;
+var y = 500;
 var windDirection = 0;
 var windSpeed = 10;
 var data = [];
@@ -35,11 +35,20 @@ function drawChart() {
 //PUT A RANDOM POINT ON THE CHART
 function randStartPoint(){
     saveInp();
+
+    //gets random x,y
     x = Math.floor(Math.random() * 1000);
     y = Math.floor(Math.random() * 1000);
-
     data.addRow([x,y]);
-    fireSpread(x,y,windSpeed)
+    
+    //adds fire spread
+    for (i=1; i<5; i++) {
+        setTimeout( function timer(){
+            fireSpread(x,y,windSpeed);
+            chart.draw(data,options);
+        }, i*1000 );
+    }
+
 
     chart.draw(data, options);
 }
@@ -63,6 +72,12 @@ function fireSpread(x,y,w){
     data.addRow([x,y+Math.floor(Math.random() * w)]);
     data.addRow([x-Math.floor(Math.random() * w),y]);
     data.addRow([x,y-Math.floor(Math.random() * w)]);
+
+    data.addRow([x+Math.floor(Math.random() * w),y+Math.floor(Math.random() * w)]);
+    data.addRow([x+Math.floor(Math.random() * w),y-Math.floor(Math.random() * w)]);
+
+    data.addRow([x-Math.floor(Math.random() * w),y-Math.floor(Math.random() * w)]);
+    data.addRow([x+Math.floor(Math.random() * w),y-Math.floor(Math.random() * w)]);
 }
 
 //ATTEMPT RECURSIVE 
@@ -85,8 +100,5 @@ function startSimulation(){
     fireSpread(x,y,windSpeed)
     //draw chart
     chart.draw(data, options);
-    google.charts.setOnLoadCallback(drawChart);
-
-    
 }
 
